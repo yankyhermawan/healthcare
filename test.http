@@ -1,0 +1,21 @@
+### REGISTER
+POST http://localhost:3000/doctor/auth/register
+Content-Type: application/json
+
+{
+    "username":"doctor",
+    "password": "doctor",
+    "name": "dr.budi",
+    "specialization":"umum",
+    "imageURL": "abc",
+    "hospital": "abc"
+}
+
+### LOGIN
+POST http://localhost:3000/doctor/auth/login
+Content-Type: application/json
+
+{
+    "username":"doctor",
+    "password": "doctor"
+}
