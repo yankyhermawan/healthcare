@@ -1,0 +1,4 @@
+.env
+/dist
+message.txt
+/node_modules

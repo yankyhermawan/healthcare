@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Patient {
+  id          String                     @id @default(uuid())
+  username    String                     @unique
+  password    String
+  name        String
+  imageURL    String
+  appointment AppointmentPatientDoctor[]
+}
+
+model Doctor {
+  id             String                     @id @default(uuid())
+  username       String                     @unique
+  password       String
+  specialization String
+  name           String
+  imageURL       String
+  hospital       String
+  rating         Rating[]
+  appointment    AppointmentPatientDoctor[]
+}
+
+model Rating {
+  id       String @id @default(uuid())
+  score    Float
+  comment  String
+  doctorId String
+  doctor   Doctor @relation(fields: [doctorId], references: [id])
+}
+
+model AppointmentPatientDoctor {
+  appointmentId String  @id @default(uuid())
+  patient       Patient @relation(fields: [patientID], references: [id])
+  patientID     String
+  doctor        Doctor  @relation(fields: [doctorID], references: [id])
+  doctorID      String
+  queueNumber   Int
+  message       String
+  status        Status
+}
+
+model Notification {
+  notificationId String  @id @default(uuid())
+  senderId       String
+  targetId       String
+  message        String
+  isRead         Boolean @default(false)
+  createdAt      String
+}
+
+enum Status {
+  Pending
+  Ongoing
+  Done
+}
