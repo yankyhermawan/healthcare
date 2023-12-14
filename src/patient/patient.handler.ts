@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { DoctorAuthService } from "./doctor.auth.service";
+import { PatientAuthService } from "./patient.auth.service";
 
-const doctorAuthService = new DoctorAuthService();
+const patientAuthService = new PatientAuthService();
 
 export async function RegisterHandler(req: Request, res: Response) {
 	const data = req.body;
-	const response = await doctorAuthService.register(data);
+	const response = await patientAuthService.register(data);
 	res.status(response.code).json(response.response);
 }
 
 export async function LoginHandler(req: Request, res: Response) {
 	const data = req.body;
-	const response = await doctorAuthService.login(data);
+	const response = await patientAuthService.login(data);
 	res.status(response.code).json(response.response);
 }
