@@ -16,6 +16,7 @@ model Patient {
   password    String
   name        String
   imageURL    String
+  performance Performance[]
   appointment AppointmentPatientDoctor[]
 }
 
@@ -27,27 +28,33 @@ model Doctor {
   name           String
   imageURL       String
   hospital       String
-  rating         Rating[]
+  performance    Performance[]
   appointment    AppointmentPatientDoctor[]
 }
 
-model Rating {
-  id       String @id @default(uuid())
-  score    Float
-  comment  String
-  doctorId String
-  doctor   Doctor @relation(fields: [doctorId], references: [id])
+model Performance {
+  id            String                   @id @default(uuid())
+  score         Float
+  comment       String
+  waitTime      Int
+  doctorId      String
+  doctor        Doctor                   @relation(fields: [doctorId], references: [id])
+  patientId     String
+  patient       Patient                  @relation(fields: [patientId], references: [id])
+  appointmentId String
+  appointment   AppointmentPatientDoctor @relation(fields: [appointmentId], references: [id])
 }
 
 model AppointmentPatientDoctor {
-  appointmentId String  @id @default(uuid())
-  patient       Patient @relation(fields: [patientID], references: [id])
-  patientID     String
-  doctor        Doctor  @relation(fields: [doctorID], references: [id])
-  doctorID      String
-  queueNumber   Int
-  message       String
-  status        Status
+  id          String        @id @default(uuid())
+  patient     Patient       @relation(fields: [patientID], references: [id])
+  patientID   String
+  doctor      Doctor        @relation(fields: [doctorID], references: [id])
+  doctorID    String
+  created     DateTime      @default(now())
+  reason      String
+  status      Status        @default(Pending)
+  performance Performance[]
 }
 
 model Notification {

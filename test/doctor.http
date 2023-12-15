@@ -19,3 +19,9 @@ Content-Type: application/json
     "username":"doctor",
     "password": "doctor"
 }
+
+### GET DOCTOR DATA BY ID
+GET http://localhost:3000/doctor/a9263cd4-7de4-4236-a35b-c4245018cbbb
+
+### GET ALL DOCTOR BY HOSPITAL
+GET http://localhost:3000/doctor?hospital=abc
