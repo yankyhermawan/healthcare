@@ -110,33 +110,33 @@ export class AppointmentService {
 	async getQueueNumber(doctorId: string, patientID: string) {
 		try {
 			const date = new Date();
-			console.log(date);
 			const allQueue =
 				await this.prismaService.appointmentPatientDoctor.findMany({
 					orderBy: {
 						created: "asc",
 					},
 					where: {
-						AND: [
-							{ doctorID: doctorId },
-							{
-								created: {
-									lte: date,
-									gte: new Date(date.setDate(date.getDate() - 1)),
-								},
-							},
-							{ status: Status.Pending },
-						],
+						doctorID: doctorId,
+						created: {
+							lte: new Date(date),
+							gte: new Date(date.setHours(0, 0, 0, 0)),
+						},
+						status: "Pending",
 					},
 				});
 			const index = allQueue.findIndex(
 				(queue) => queue.patientID === patientID
 			);
-			console.log(index);
+			if (index === -1) {
+				return {
+					code: StatusCodes.NOT_FOUND,
+					response: "Queue not found",
+				};
+			}
 			return {
 				code: StatusCodes.OK,
 				response: {
-					queueNumber: index,
+					queueNumber: index + 1,
 				},
 			};
 		} catch (err) {

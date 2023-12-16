@@ -3,9 +3,9 @@ POST http://localhost:3000/patient/auth/register
 Content-Type: application/json
 
 {
-    "username":"patient",
-    "password": "patient",
-    "name": "patient",
+    "username":"patient1",
+    "password": "patient1",
+    "name": "patient1",
     "imageURL": "abc"
 }
 

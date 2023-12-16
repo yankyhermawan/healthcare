@@ -3,9 +3,9 @@ POST http://localhost:3000/appointment/
 Content-Type: application/json
 
 {
-    "patientID": "84e09f67-560b-48f8-80c7-9da6349d6eda",
-    "doctorID": "a9263cd4-7de4-4236-a35b-c4245018cbbb",
-    "reason": "fever"
+    "patientID": "8bd02db1-5b50-4e31-a96c-7fef7045351a",
+    "doctorID": "22116f6e-931f-4362-a315-cd31eed6e0ee",
+    "reason": "cold"
 }
 
 ### GET APPOINTMENT DATA BY APPOINTMENT ID
@@ -28,4 +28,4 @@ Content-Type: application/json
 }
 
 ### GET QUEUE NUMBER
-GET http://localhost:3000/appointment/antri?
+GET http://localhost:3000/appointment/queue/param?patientId=84e09f67-560b-48f8-80c7-9da6349d6eda&doctorId=a9263cd4-7de4-4236-a35b-c4245018cbbb

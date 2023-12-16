@@ -3,9 +3,9 @@ POST http://localhost:3000/doctor/auth/register
 Content-Type: application/json
 
 {
-    "username":"doctor",
-    "password": "doctor",
-    "name": "dr.budi",
+    "username":"doctor1",
+    "password": "doctor1",
+    "name": "dr.budi1",
     "specialization":"umum",
     "imageURL": "abc",
     "hospital": "abc"

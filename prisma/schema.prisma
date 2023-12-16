@@ -46,24 +46,27 @@ model Performance {
 }
 
 model AppointmentPatientDoctor {
-  id          String        @id @default(uuid())
-  patient     Patient       @relation(fields: [patientID], references: [id])
-  patientID   String
-  doctor      Doctor        @relation(fields: [doctorID], references: [id])
-  doctorID    String
-  created     DateTime      @default(now())
-  reason      String
-  status      Status        @default(Pending)
-  performance Performance[]
+  id           String         @id @default(uuid())
+  patient      Patient        @relation(fields: [patientID], references: [id])
+  patientID    String
+  doctor       Doctor         @relation(fields: [doctorID], references: [id])
+  doctorID     String
+  created      DateTime       @default(now())
+  reason       String
+  status       Status         @default(Pending)
+  performance  Performance[]
+  notification Notification[]
 }
 
 model Notification {
-  notificationId String  @id @default(uuid())
+  notificationId String                   @id @default(uuid())
+  appointmentId  String
+  appointment    AppointmentPatientDoctor @relation(fields: [appointmentId], references: [id])
   senderId       String
   targetId       String
   message        String
-  isRead         Boolean @default(false)
-  createdAt      String
+  isRead         Boolean                  @default(false)
+  createdAt      DateTime                 @default(now())
 }
 
 enum Status {
