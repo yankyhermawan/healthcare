@@ -114,13 +114,13 @@ export class AppointmentService {
 			const allQueue =
 				await this.prismaService.appointmentPatientDoctor.findMany({
 					orderBy: {
-						dateTime: "asc",
+						created: "asc",
 					},
 					where: {
 						AND: [
 							{ doctorID: doctorId },
 							{
-								dateTime: {
+								created: {
 									lte: date,
 									gte: new Date(date.setDate(date.getDate() - 1)),
 								},
