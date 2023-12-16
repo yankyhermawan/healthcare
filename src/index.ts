@@ -4,6 +4,7 @@ import { patientRouter } from "./patient/patient.router";
 import { appointmentRouter } from "./appointment/appointment.router";
 // import { WindowDefender } from "./middleware/middleware";
 import cors from "cors";
+import expressListRoutes from "express-list-routes";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,3 +19,5 @@ app.use("/appointment", appointmentRouter);
 app.listen(port, () => {
 	console.log(`Listening on ${port}`);
 });
+
+expressListRoutes(app);

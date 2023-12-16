@@ -1,7 +1,8 @@
 import { PrismaService } from "../prisma.service";
 import { StatusCodes } from "http-status-codes";
-import { CreateAppointment } from "./appointment.interface";
+import { CreateAppointment, UpdateStatus } from "./appointment.interface";
 import { Prisma } from "@prisma/client";
+import { Status } from "@prisma/client";
 
 export class AppointmentService {
 	private readonly prismaService: PrismaService;
@@ -12,6 +13,7 @@ export class AppointmentService {
 
 	private error(err: unknown) {
 		if (err instanceof Prisma.PrismaClientValidationError) {
+			console.error(err);
 			return { code: StatusCodes.BAD_REQUEST, response: "Bad request" };
 		}
 		return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: err };
@@ -65,6 +67,78 @@ export class AppointmentService {
 				};
 			}
 			return { code: StatusCodes.OK, response: response };
+		} catch (err) {
+			return this.error(err);
+		}
+	}
+
+	async changeAppointmentStatus(appointmentId: string, data: UpdateStatus) {
+		try {
+			const response =
+				await this.prismaService.appointmentPatientDoctor.findUnique({
+					where: { id: appointmentId },
+				});
+			if (!response) {
+				return {
+					code: StatusCodes.NOT_FOUND,
+					response: "Appointment not found",
+				};
+			}
+			console.log(data.status.toLowerCase());
+			const status = () => {
+				if (data.status.toLowerCase() === "ongoing") {
+					return Status.Ongoing;
+				} else if (data.status.toLowerCase() === "done") {
+					return Status.Done;
+				}
+				return Status.Pending;
+			};
+			const changed = await this.prismaService.appointmentPatientDoctor.update({
+				where: {
+					id: appointmentId,
+				},
+				data: {
+					status: status() as Status,
+				},
+			});
+			return { code: StatusCodes.OK, response: changed };
+		} catch (err) {
+			return this.error(err);
+		}
+	}
+
+	async getQueueNumber(doctorId: string, patientID: string) {
+		try {
+			const date = new Date();
+			console.log(date);
+			const allQueue =
+				await this.prismaService.appointmentPatientDoctor.findMany({
+					orderBy: {
+						dateTime: "asc",
+					},
+					where: {
+						AND: [
+							{ doctorID: doctorId },
+							{
+								dateTime: {
+									lte: date,
+									gte: new Date(date.setDate(date.getDate() - 1)),
+								},
+							},
+							{ status: Status.Pending },
+						],
+					},
+				});
+			const index = allQueue.findIndex(
+				(queue) => queue.patientID === patientID
+			);
+			console.log(index);
+			return {
+				code: StatusCodes.OK,
+				response: {
+					queueNumber: index,
+				},
+			};
 		} catch (err) {
 			return this.error(err);
 		}

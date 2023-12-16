@@ -18,3 +18,14 @@ GET http://localhost:3000/appointment/a9263cd4-7de4-4236-a35b-c4245018cbbb
 ###
 # BY PATIENT ID
 GET http://localhost:3000/appointment/84e09f67-560b-48f8-80c7-9da6349d6eda
+
+### CHANGE APPOINTMENT STATUS
+PATCH http://localhost:3000/appointment?appointmentId=ead95413-6b0d-4656-a39c-db0f7df350d7
+Content-Type: application/json
+
+{
+    "status": "Ongoing"
+}
+
+### GET QUEUE NUMBER
+GET http://localhost:3000/appointment/antri?

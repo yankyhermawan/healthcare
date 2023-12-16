@@ -6,3 +6,7 @@ export interface CreateAppointment {
 	reason: string;
 	status?: Status;
 }
+
+export interface UpdateStatus {
+	status: string;
+}
