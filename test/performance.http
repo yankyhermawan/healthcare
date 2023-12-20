@@ -1,0 +1,17 @@
+### CREATE PERFORMANCE
+POST http://localhost:3000/performance/create
+Content-Type: application/json
+
+{
+    "score": 5,
+	"comment": "Dokter nya ramah",
+	"doctorId": "3a678e10-340e-4812-b2ac-6ec901207584",
+	"patientId": "ad7fcd79-47ba-431f-a5d5-9d33b44cfc3f",
+	"appointmentId": "e39ff2e5-4643-4966-ba35-e0151c56be67"
+}
+
+### GET DOCTOR PERFORMANCE
+GET http://localhost:3000/performance/3a678e10-340e-4812-b2ac-6ec901207584
+
+### GET DOCTOR AVERAGE SCORE
+GET http://localhost:3000/performance/average/3a678e10-340e-4812-b2ac-6ec901207584

@@ -53,6 +53,8 @@ const initSocket = (server: httpServer) => {
 			io.to(data.patientId).emit("getQueue", queue.response);
 		});
 
+		// METHOD FOR PATIENT TO VIEW CURRENT QUEUE NUMBER
+
 		socket.on("currentQueue", async (data: Queue) => {
 			const ongoingQueueNumber = await appointmentService.getOngoingIndex(
 				data.doctorId

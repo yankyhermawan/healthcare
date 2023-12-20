@@ -1,14 +1,27 @@
 import express from "express";
 import { AppointmentHandler } from "./appointment.handler";
+import {
+	authentication,
+	DoctorGuard,
+	PatientGuard,
+} from "../middleware/middleware";
 
 const appointmentRouter = express.Router();
 const appointmentHandler = new AppointmentHandler();
 
 appointmentRouter
 	.route("/")
-	.get(appointmentHandler.getAppointmentByAppointmentIdHandler)
-	.post(appointmentHandler.createAppointmentHandler)
-	.patch(appointmentHandler.changeAppointmentStatus);
+	.get(authentication, appointmentHandler.getAppointmentByAppointmentIdHandler)
+	.post(
+		authentication,
+		PatientGuard,
+		appointmentHandler.createAppointmentHandler
+	)
+	.patch(
+		authentication,
+		DoctorGuard,
+		appointmentHandler.changeAppointmentStatus
+	);
 
 appointmentRouter.get(
 	"/:userId",

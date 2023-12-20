@@ -14,31 +14,54 @@ export class PerformanceService {
 	}
 
 	private error(err: unknown) {
-		if (err instanceof Prisma.PrismaClientValidationError) {
+		if (
+			err instanceof Prisma.PrismaClientValidationError ||
+			err instanceof Prisma.PrismaClientKnownRequestError
+		) {
 			return { code: StatusCodes.BAD_REQUEST, response: "Bad request" };
 		}
 		return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: err };
 	}
 
 	async createPerformance(data: CreatePerformance) {
-		const timePerformance = await this.appointmentService.getTime(
-			data.appointmentId
-		);
-		const response = await this.prismaService.performance.create({
-			data: {
-				...data,
-				waitTime: timePerformance.waitTime,
-				serviceTime: timePerformance.serviceTime,
-			},
-		});
-		return { code: StatusCodes.CREATED, response: response };
+		try {
+			const timePerformance = await this.appointmentService.getTime(
+				data.appointmentId
+			);
+			const response = await this.prismaService.performance.create({
+				data: {
+					...data,
+					waitTime: timePerformance.waitTime,
+					serviceTime: timePerformance.serviceTime,
+				},
+			});
+			return { code: StatusCodes.CREATED, response: response };
+		} catch (err) {
+			return this.error(err);
+		}
 	}
 
-	async getPerformanceByPerformanceId(performanceId: string) {
+	async getDoctorPerformance(doctorId: string) {
+		try {
+			const response = await this.prismaService.performance.findMany({
+				where: {
+					doctorId: doctorId,
+				},
+			});
+			if (!response) {
+				return { code: StatusCodes.NOT_FOUND, response: response };
+			}
+			return { code: StatusCodes.OK, response: response };
+		} catch (err) {
+			return this.error(err);
+		}
+	}
+
+	async getPerformanceByPerformanceId(appointmentId: string) {
 		try {
 			const response = await this.prismaService.performance.findUnique({
 				where: {
-					id: performanceId,
+					appointmentId: appointmentId,
 				},
 			});
 			if (!response) {
@@ -63,7 +86,7 @@ export class PerformanceService {
 					doctorId: doctorId,
 				},
 			});
-			if (!response) {
+			if (response.length === 0) {
 				return { code: StatusCodes.BAD_REQUEST, response: "No record found" };
 			}
 			const totalScore = response.reduce(

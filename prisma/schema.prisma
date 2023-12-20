@@ -33,7 +33,6 @@ model Doctor {
 }
 
 model Performance {
-  id            String                   @id @default(uuid())
   score         Float
   comment       String
   waitTime      Int?
@@ -44,6 +43,8 @@ model Performance {
   patient       Patient                  @relation(fields: [patientId], references: [id])
   appointmentId String
   appointment   AppointmentPatientDoctor @relation(fields: [appointmentId], references: [id])
+
+  @@id(appointmentId)
 }
 
 model AppointmentPatientDoctor {
