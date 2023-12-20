@@ -1,12 +1,12 @@
 import { Status } from "@prisma/client";
 
 export interface CreateAppointment {
-	patientID: string;
-	doctorID: string;
+	patientId: string;
+	doctorId: string;
 	reason: string;
-	status?: Status;
+	status: Status;
 }
 
 export interface UpdateStatus {
-	status: string;
+	status: Status;
 }

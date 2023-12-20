@@ -34,14 +34,14 @@ export class AppointmentHandler {
 			res.status(StatusCodes.BAD_REQUEST).json("Invalid query");
 		}
 		const data = req.body;
-		const response = await appointmentService.changeAppointmentStatus(
+		const response = await appointmentService.setAppointmentStatusOngoing(
 			appointmentId,
 			data
 		);
 		res.status(response.code).json(response.response);
 	}
 
-	async getAppointmentQueue(req: Request, res: Response) {
+	async getQueueNumberHandler(req: Request, res: Response) {
 		const patientId = req.query.patientId?.toString() || "";
 		const doctorId = req.query.doctorId?.toString() || "";
 		if (!doctorId || !patientId) {

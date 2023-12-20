@@ -3,9 +3,9 @@ POST http://localhost:3000/appointment/
 Content-Type: application/json
 
 {
-    "patientID": "8bd02db1-5b50-4e31-a96c-7fef7045351a",
-    "doctorID": "22116f6e-931f-4362-a315-cd31eed6e0ee",
-    "reason": "cold"
+    "patientId": "ad7fcd79-47ba-431f-a5d5-9d33b44cfc3f",
+    "doctorId": "3a678e10-340e-4812-b2ac-6ec901207584",
+    "reason": "demam"
 }
 
 ### GET APPOINTMENT DATA BY APPOINTMENT ID

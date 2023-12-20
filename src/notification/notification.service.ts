@@ -13,7 +13,7 @@ export class NotificationService {
 		if (err instanceof Prisma.PrismaClientValidationError) {
 			return { code: StatusCodes.BAD_REQUEST, response: "Invalid request" };
 		}
-		return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: err };
+		return { code: StatusCodes.INTERNAL_SERVER_ERROR, response: String(err) };
 	}
 
 	async createNotification(data: CreateNotification) {
@@ -21,7 +21,7 @@ export class NotificationService {
 			const response = await this.prismaService.notification.create({
 				data: data,
 			});
-			return { code: StatusCodes.CREATED, response: response.appointmentId };
+			return { code: StatusCodes.CREATED, response: response.id };
 		} catch (err) {
 			return this.error(err);
 		}

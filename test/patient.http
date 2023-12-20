@@ -14,8 +14,8 @@ POST http://localhost:3000/patient/auth/login
 Content-Type: application/json
 
 {
-    "username":"patient",
-    "password": "patient"
+    "username":"patient1",
+    "password": "patient1"
 }
 
 ### GET PATIENT DATA

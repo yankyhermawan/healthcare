@@ -45,7 +45,7 @@ export class DoctorAuthService {
 				data: data,
 			});
 			data.password = "";
-			return { code: StatusCodes.CREATED, response: response };
+			return { code: StatusCodes.CREATED, response: response.id };
 		} catch (err) {
 			return this.error(err);
 		}

@@ -15,5 +15,5 @@ appointmentRouter.get(
 	appointmentHandler.getAppointmentByUserIdHandler
 );
 
-appointmentRouter.get("/queue/param", appointmentHandler.getAppointmentQueue);
+appointmentRouter.get("/queue/param", appointmentHandler.getQueueNumberHandler);
 export { appointmentRouter };

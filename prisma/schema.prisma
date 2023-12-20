@@ -36,7 +36,8 @@ model Performance {
   id            String                   @id @default(uuid())
   score         Float
   comment       String
-  waitTime      Int
+  waitTime      Int?
+  serviceTime   Int?
   doctorId      String
   doctor        Doctor                   @relation(fields: [doctorId], references: [id])
   patientId     String
@@ -47,11 +48,13 @@ model Performance {
 
 model AppointmentPatientDoctor {
   id           String         @id @default(uuid())
-  patient      Patient        @relation(fields: [patientID], references: [id])
-  patientID    String
-  doctor       Doctor         @relation(fields: [doctorID], references: [id])
-  doctorID     String
-  created      DateTime       @default(now())
+  patient      Patient        @relation(fields: [patientId], references: [id])
+  patientId    String
+  doctor       Doctor         @relation(fields: [doctorId], references: [id])
+  doctorId     String
+  createdAt    DateTime?
+  calledAt     DateTime?
+  doneAt       DateTime?
   reason       String
   status       Status         @default(Pending)
   performance  Performance[]
@@ -59,14 +62,14 @@ model AppointmentPatientDoctor {
 }
 
 model Notification {
-  notificationId String                   @id @default(uuid())
-  appointmentId  String
-  appointment    AppointmentPatientDoctor @relation(fields: [appointmentId], references: [id])
-  senderId       String
-  targetId       String
-  message        String
-  isRead         Boolean                  @default(false)
-  createdAt      DateTime                 @default(now())
+  id            String                   @id @default(uuid())
+  appointmentId String
+  appointment   AppointmentPatientDoctor @relation(fields: [appointmentId], references: [id])
+  senderId      String
+  targetId      String
+  message       String
+  isRead        Boolean                  @default(false)
+  createdAt     DateTime                 @default(now())
 }
 
 enum Status {

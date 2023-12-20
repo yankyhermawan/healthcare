@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Expose the port (if your application listens on a specific port)
-EXPOSE 4000
+EXPOSE 3000
 
 # Command to run your application (if required, adjust as per your setup)
 CMD ["node", "dist/index.js"]

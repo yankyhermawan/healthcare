@@ -42,7 +42,7 @@ export class PatientAuthService {
 				data: data,
 			});
 			response.password = "";
-			return { code: StatusCodes.CREATED, response: response };
+			return { code: StatusCodes.CREATED, response: response.id };
 		} catch (err) {
 			return this.error(err);
 		}
