@@ -20,6 +20,8 @@ services:
       - ./dist:/app/dist       # Mount the 'dist' directory as a volume inside the container
     environment:
       - DATABASE_URL=postgres://postgres:admin@postgres:5432/healthcare
+      - JWT_KEY=ada2a4c6349d5a9f742ef16036ff18a1a37165ddbd4f45fe4f34c9caf80d33f3
+      - SALT=10
     depends_on:
       - postgres
 volumes:
