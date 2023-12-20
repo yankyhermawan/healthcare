@@ -6,6 +6,10 @@
 
 A backend service for improving the efficiency of healthcare facilities by implementing a digital patient queue system. The goal is to create a service that manages patient queues in hospitals and clinics, streamlining the check-in, waiting, and treatment processes. The system should be scalable, reliable, and provide a seamless experience for both patients and healthcare providers.
 
+### DATABASE SCHEMA
+
+![Database schema](./assets/db_schema.png)
+
 ### Tech Stack
 
 ---
@@ -60,4 +64,4 @@ docker build -t healtchare .
 docker-compose up -d
 ```
 
-API Documentation: https://documenter.getpostman.com/view/26585922/2s9Ykq6L1Y
+API Documentation: https://app.getpostman.com/join-team?invite_code=706ffa3befd604b02589f557bafd84f4&target_code=40a41b4ce2bc6b42c73c71a3f1c41ad0
