@@ -1,0 +1,35 @@
+### CREATE AN APPOINTMENT
+POST http://localhost:3000/appointment/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFlOTM2OWFlLWVjZGUtNDgwYS05NjA1LWNjZWJmOTdhZmY1MCIsInVzZXJuYW1lIjoicGF0aWVudCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAzMDg5NDc2LCJleHAiOjE3MDMxMzI2NzZ9.Q2zTjJ3G_ikRCtkVdZI8cy9pYWEQctA0AWUsP-L8n84
+
+{
+    "patientId": "ae9369ae-ecde-480a-9605-ccebf97aff50",
+    "doctorId": "e82ca00e-11a5-416d-8fb4-06cd8937043b",
+    "reason": "demam"
+}
+
+### GET APPOINTMENT DATA BY APPOINTMENT ID
+GET http://localhost:3000/appointment?appointmentId=f52e5c5a-98a9-4306-a584-4b6cbd24a159
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFlOTM2OWFlLWVjZGUtNDgwYS05NjA1LWNjZWJmOTdhZmY1MCIsInVzZXJuYW1lIjoicGF0aWVudCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAzMDg5NDc2LCJleHAiOjE3MDMxMzI2NzZ9.Q2zTjJ3G_ikRCtkVdZI8cy9pYWEQctA0AWUsP-L8n84
+
+### GET APPOINTMENT DATA BY USER ID
+# BY DOCTOR ID
+GET http://localhost:3000/appointment/e82ca00e-11a5-416d-8fb4-06cd8937043b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFlOTM2OWFlLWVjZGUtNDgwYS05NjA1LWNjZWJmOTdhZmY1MCIsInVzZXJuYW1lIjoicGF0aWVudCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAzMDg5NDc2LCJleHAiOjE3MDMxMzI2NzZ9.Q2zTjJ3G_ikRCtkVdZI8cy9pYWEQctA0AWUsP-L8n84
+
+###
+# BY PATIENT ID
+GET http://localhost:3000/appointment/ae9369ae-ecde-480a-9605-ccebf97aff50
+
+### CHANGE APPOINTMENT STATUS
+PATCH http://localhost:3000/appointment?appointmentId=f52e5c5a-98a9-4306-a584-4b6cbd24a159
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4MmNhMDBlLTExYTUtNDE2ZC04ZmI0LTA2Y2Q4OTM3MDQzYiIsInVzZXJuYW1lIjoiZG9jdG9yIiwicm9sZSI6ImRvY3RvciIsImlhdCI6MTcwMzA5MDU3OSwiZXhwIjoxNzAzMTMzNzc5fQ.rziIfW_SBa3TUMXXCflrGvmqXTQrt9x6qUjV3KXcsYI
+
+{
+    "status": "Ongoing"
+}
+
+### GET QUEUE NUMBER
+GET http://localhost:3000/appointment/queue/param?patientId=ae9369ae-ecde-480a-9605-ccebf97aff50&doctorId=e82ca00e-11a5-416d-8fb4-06cd8937043b

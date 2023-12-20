@@ -1,0 +1,23 @@
+### REGISTER
+POST http://localhost:3000/patient/auth/register
+Content-Type: application/json
+
+{
+    "username":"patient",
+    "password": "patient",
+    "name": "patient",
+    "imageURL": "abc"
+}
+
+### LOGIN
+POST http://localhost:3000/patient/auth/login
+Content-Type: application/json
+
+{
+    "username":"patient",
+    "password": "patient"
+}
+
+### GET PATIENT DATA
+GET http://localhost:3000/patient/ae9369ae-ecde-480a-9605-ccebf97aff50
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFlOTM2OWFlLWVjZGUtNDgwYS05NjA1LWNjZWJmOTdhZmY1MCIsInVzZXJuYW1lIjoicGF0aWVudCIsInJvbGUiOiJwYXRpZW50IiwiaWF0IjoxNzAzMDkwNzA5LCJleHAiOjE3MDMxMzM5MDl9.cFt0bIajIc45lRwdAtsxAaybGPlZSNyhk5AYcNTuWWM

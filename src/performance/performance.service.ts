@@ -48,7 +48,7 @@ export class PerformanceService {
 					doctorId: doctorId,
 				},
 			});
-			if (!response) {
+			if (response.length === 0) {
 				return { code: StatusCodes.NOT_FOUND, response: response };
 			}
 			return { code: StatusCodes.OK, response: response };
@@ -57,7 +57,7 @@ export class PerformanceService {
 		}
 	}
 
-	async getPerformanceByPerformanceId(appointmentId: string) {
+	async getPerformanceByAppointmentId(appointmentId: string) {
 		try {
 			const response = await this.prismaService.performance.findUnique({
 				where: {

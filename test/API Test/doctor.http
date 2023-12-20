@@ -21,7 +21,8 @@ Content-Type: application/json
 }
 
 ### GET DOCTOR DATA BY ID
-GET http://localhost:3000/doctor/a9263cd4-7de4-4236-a35b-c4245018cbbb
+GET http://localhost:3000/doctor/e82ca00e-11a5-416d-8fb4-06cd8937043b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4MmNhMDBlLTExYTUtNDE2ZC04ZmI0LTA2Y2Q4OTM3MDQzYiIsInVzZXJuYW1lIjoiZG9jdG9yIiwicm9sZSI6ImRvY3RvciIsImlhdCI6MTcwMzA5MDY2MSwiZXhwIjoxNzAzMTMzODYxfQ.OAKw3FQ95X3jK9qaSFnZEir7YBESVSA9BYnjBT12a_A
 
 ### GET ALL DOCTOR BY HOSPITAL
 GET http://localhost:3000/doctor?hospital=abc
